@@ -37,8 +37,6 @@ func RegisterRoutes(r *gin.Engine) {
         authorized.DELETE("/classes/:id", handlers.DeleteClass)
 
         authorized.POST("/locations", handlers.CreateLocation)
-        authorized.GET("/locations", handlers.GetLocations)
-        authorized.GET("/locations/:id", handlers.GetLocation)
         authorized.PUT("/locations/:id", handlers.UpdateLocation)
         authorized.DELETE("/locations/:id", handlers.DeleteLocation)
     }

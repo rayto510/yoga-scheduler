@@ -70,9 +70,9 @@ func UpdateInstructor(c *gin.Context) {
 	}
 
 	// Update allowed fields explicitly
-	existing.Name = input.Name
+	existing.FirstName = input.FirstName
+	existing.LastName = input.LastName
 	existing.Bio = input.Bio
-	existing.PhotoURL = input.PhotoURL // example field, adjust as needed
 
 	if err := db.DB.Save(&existing).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update instructor"})
