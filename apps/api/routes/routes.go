@@ -7,6 +7,7 @@ import (
 )
 
 func RegisterRoutes(r *gin.Engine) {
+    r.Use(handlers.StudioIDMiddleware())
 	// Instructors routes
 	r.GET("/instructors", handlers.GetInstructors)
 	r.GET("/instructors/:id", handlers.GetInstructor)

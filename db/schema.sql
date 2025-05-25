@@ -1,3 +1,11 @@
+-- Studios table
+CREATE TABLE studios (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- Users table
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -5,14 +13,6 @@ CREATE TABLE users (
     email VARCHAR(100) UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
     role VARCHAR(20) NOT NULL DEFAULT 'student',
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- Studios table
-CREATE TABLE studios (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -75,13 +75,4 @@ CREATE TABLE bookings (
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     UNIQUE (class_id, student_id) -- prevent double booking same class
-);
-
--- Locations table
-CREATE TABLE locations (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    address TEXT,
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
 );

@@ -2,11 +2,29 @@ package handlers
 
 import (
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 )
+
+func StudioIDMiddleware() gin.HandlerFunc {
+    return func(c *gin.Context) {
+        studioIDStr := c.GetHeader("X-Studio-ID")
+        if studioIDStr == "" {
+            c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "X-Studio-ID header missing"})
+            return
+        }
+        id64, err := strconv.ParseUint(studioIDStr, 10, 32)
+        if err != nil {
+            c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "Invalid X-Studio-ID"})
+            return
+        }
+        c.Set("studio_id", uint(id64))
+        c.Next()
+    }
+}
 
 func AuthMiddleware() gin.HandlerFunc {
     return func(c *gin.Context) {
